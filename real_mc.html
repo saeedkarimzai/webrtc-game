@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Minecraft</title>
-    <base href="https://16f81.codesandbox.io" />
+    <base href="https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/" />
     <meta name="keywords" content="Minecraft" />
     <meta
       name="description"
@@ -13,6 +13,38 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" id="themeColor" />
+<script>
+(() => {
+  const raw = "https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/";
+  const rewrite = value => {
+    if (typeof value !== 'string') return value;
+    return value
+      .replaceAll('https://16f81.codesandbox.io/', raw)
+      .replaceAll('https://server.nathaniel2006.repl.co/panorama', raw + 'images/panorama/p.png')
+      .replaceAll('https://sakuzyokun.github.io/Minecraft/sounds/', raw + 'sounds/');
+  };
+  const originalFetch = window.fetch.bind(window);
+  window.fetch = (input, init) => originalFetch(rewrite(input), init);
+  const originalOpen = XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open = function(method, url, ...rest) {
+    return originalOpen.call(this, method, rewrite(url), ...rest);
+  };
+  const descriptor = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+  if (descriptor && descriptor.set && descriptor.get) {
+    Object.defineProperty(HTMLImageElement.prototype, 'src', {
+      configurable: true,
+      enumerable: descriptor.enumerable,
+      get: descriptor.get,
+      set(value) {
+        const next = rewrite(value);
+        if (typeof next === 'string' && next.startsWith(raw)) this.crossOrigin = 'anonymous';
+        return descriptor.set.call(this, next);
+      }
+    });
+  }
+})();
+</script>
+
     <link
       id="vtfont"
       href="https://fonts.googleapis.com/css2?family=mojangles&display=swap"
@@ -83,7 +115,7 @@
       opacity: 0;
       width: 70px;
       height: 70px;
-      background-image: url("https://16f81.codesandbox.io/images/world_selection.png");
+      background-image: url("https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/images/world_selection.png");
       background-position: 0 0;
       background-size: 800%;
       image-rendering: pixelated;
@@ -101,7 +133,7 @@
       width: 20px;
       height: 14px;
       image-rendering: pixelated;
-      background-image: url("https://16f81.codesandbox.io/images/ping.png");
+      background-image: url("https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/images/ping.png");
       background-position: 0 0;
       background-size: 40px 600%;
     }
@@ -491,7 +523,7 @@ font-family:mojangles;
           <h1>Load save menu</h1>
           The load save menu is where you load and create worlds.<br />
           <img
-            src="https://16f81.codesandbox.io/images/help/loadsave.png"
+            src="https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/images/help/loadsave.png"
             style="border: 1px solid white;"
           /><br />
           To select a world, you click it.<br />
@@ -561,22 +593,22 @@ font-family:mojangles;
           There are effects that change how the hearts look.<br />
           When you are withered, it looks like this:
           <img
-            src="https://16f81.codesandbox.io/images/witherHealthBar.gif"
+            src="https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/images/witherHealthBar.gif"
           /><br />
           When you are freezing, it looks like this:
-          <img src="https://16f81.codesandbox.io/images/freezeHealthBar.gif" />
+          <img src="https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/images/freezeHealthBar.gif" />
         </div>
         <div id="help_inventory">
           <h1>Inventory</h1>
           When playing a world, press e to open the inventory.<br /><br />
           <h2>Creative inventory</h2>
           <img
-            src="https://16f81.codesandbox.io/images/help/inventory.png"
+            src="https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/images/help/inventory.png"
             style="border: 1px solid white;"
           /><br />
           <h2>Survival inventory</h2>
           <img
-            src="https://16f81.codesandbox.io/images/help/survival_inventory.png"
+            src="https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/images/help/survival_inventory.png"
             style="border: 1px solid white;"
           /><br />
           More info will come soon.
@@ -623,11 +655,11 @@ font-family:mojangles;
     </div>
     <div id="loader">
       <div class="name">
-        <img src="https://16f81.codesandbox.io/images/minecraft.png" />
+        <img src="https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/images/minecraft.png" />
       </div>
       <br />
       <img
-        src="https://16f81.codesandbox.io/images/loading.gif"
+        src="https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/images/loading.gif"
         id="loadingImg"
       /><br /><br />
       <div id="loadBar">
@@ -885,13 +917,13 @@ font-family:mojangles;
     </script>
     <script
       type="application/javascript"
-      src="https://16f81.codesandbox.io/app.js"
+      src="https://raw.githubusercontent.com/sakuzyokun/sakuzyokun.github.io/050c6022834299ade38b5d31fb4a90ef455a2b6b/Minecraft/app.js"
       onerror="document.getElementById('dependencyError').style.display='grid'"
     ></script>
     <div id="dependencyError" style="display:none;position:fixed;inset:0;z-index:99999;place-items:center;background:#090d16;color:#fff;font:16px system-ui;padding:24px;text-align:center">
       <div style="max-width:520px">
         <h2>Game assets could not load</h2>
-        <p>This repository currently depends on the original CodeSandbox asset host. If that host is offline or blocked, the game cannot start. The full asset folder must be exported into this repository to make it self-contained.</p>
+        <p>The game assets are loaded from a pinned public snapshot of the original project. Internet access is required. Multiplayer still depends on the original third-party account and WebSocket service, which is not operated by this repository.</p>
       </div>
     </div>
     <!--</body>-->

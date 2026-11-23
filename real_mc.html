@@ -886,7 +886,14 @@ font-family:mojangles;
     <script
       type="application/javascript"
       src="https://16f81.codesandbox.io/app.js"
+      onerror="document.getElementById('dependencyError').style.display='grid'"
     ></script>
+    <div id="dependencyError" style="display:none;position:fixed;inset:0;z-index:99999;place-items:center;background:#090d16;color:#fff;font:16px system-ui;padding:24px;text-align:center">
+      <div style="max-width:520px">
+        <h2>Game assets could not load</h2>
+        <p>This repository currently depends on the original CodeSandbox asset host. If that host is offline or blocked, the game cannot start. The full asset folder must be exported into this repository to make it self-contained.</p>
+      </div>
+    </div>
     <!--</body>-->
   </body>
 </html>
